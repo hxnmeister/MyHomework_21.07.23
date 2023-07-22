@@ -5,10 +5,15 @@ const usersApiUrl = "https://jsonplaceholder.typicode.com/users";
 const postsApiUrl = "https://jsonplaceholder.typicode.com/posts";
 const commentsApiUrl = "https://jsonplaceholder.typicode.com/comments";
 
-const usersContainer = document.getElementById("users");
+const biography = document.getElementById("biography");
+const postTitle = document.getElementById("posttitle");
+const postComments = document.getElementById("comments");
 const userFullInfo = document.getElementById("userfullinfo");
+const postFullInfo = document.getElementById("postfullinfo");
 const postsHeaders = document.getElementById("postsheaders");
-const fullUserInfo = document.getElementById("fullinfo");
+const usersContainer = document.getElementById("users");
+const newsFeed = document.getElementById("newsfeed");
+const postHeadersList = postsHeaders.querySelector("ul");
 
 
 const getUsers = async () =>
@@ -26,6 +31,10 @@ const getUsers = async () =>
         usersData.push(user);
     }));
 }
+const showAllPosts = async () =>
+{
+
+}
 
 getUsers();
 
@@ -37,10 +46,11 @@ usersContainer.addEventListener("click", async (event) =>
     {
         const position = selectedUser.id - 1;
 
+        newsFeed.hidden = true;
         usersContainer.hidden = true;
         userFullInfo.hidden = false;
 
-        fullUserInfo.innerHTML =
+        biography.innerHTML =
         `
             <p><b>Name: </b>${usersData[position].name}</p>
             <p><b>Username: </b>${usersData[position].username}</p>
@@ -51,21 +61,70 @@ usersContainer.addEventListener("click", async (event) =>
             <p><b>Website: </b>${usersData[position].website}</p>
             <p><b>Company: </b>${usersData[position].company.name}</p>
         `
-        await fetch(`${postsApiUrl}?userId=${selectedUser.id}`).then(response => response.json()).then(postsArray =>
-            postsArray.map(post => 
-            {
-                postsHeaders.querySelector("ul").innerHTML += `<li id="${post.id}" class="postheader"><u>${post.title}</u></li>`
-                userPosts.push(post);
-            })
-        );
+        await fetch(`${postsApiUrl}?userId=${selectedUser.id}`).then(response => response.json()).then(postsArray => postsArray.map(post => 
+        {
+            postHeadersList.innerHTML += `<li id="${post.id}" class="postheader"><u>${post.title}</u></li>`
+            userPosts.push(post);
+        }));
     } 
 });
-postsHeaders.addEventListener("click", (event) => 
+postsHeaders.addEventListener("click", async (event) => 
 {
     const selectedPost = event.target.closest(".postheader");
 
     if(selectedPost !== null)
     {
-        console.log(selectedPost.id)
+        const userId = userPosts[0].userId - 1;
+        const post = userPosts.find(post => String(post.id) === selectedPost.id);
+
+        userFullInfo.hidden = true;
+        postFullInfo.hidden = false;
+        
+        postTitle.innerHTML =
+        `
+            <p><b>Title: </b>${post.title}</p>
+            <p id="authorname"><b>Author: </b>${usersData[userId].name}</p>
+            <br>
+            <p>${post.body}</p>
+        `
+
+        await fetch(`${commentsApiUrl}?postId=${selectedPost.id}`).then(response => response.json()).then(commentsArray => commentsArray.map(comment =>
+        {
+            postComments.innerHTML +=
+            `
+                <div class="comment">
+                    <p><b>Name: </b>${comment.name}</p>
+                    <p><b>Email: </b>${comment.email}</p>
+                    <br>
+                    <p><b>${comment.body}</b></p>
+                </div>
+            `
+        }));
+    }
+});
+postTitle.addEventListener("click", (event) => 
+{
+    const authorSelected = event.target.closest("#authorname");
+
+    if(authorSelected !== null)
+    {
+        userFullInfo.hidden = false;
+        postFullInfo.hidden = true;
+
+        postComments.innerHTML = "";
+    }
+});
+document.getElementById("homebutton").addEventListener("click", () => 
+{
+    if(usersContainer.hidden)
+    {
+        usersContainer.hidden = false;
+        newsFeed.hidden = false;
+
+        userFullInfo.hidden = true;
+        postFullInfo.hidden = true;
+
+        postHeadersList.innerHTML = "";
+        postComments.innerHTML = "";
     }
 });

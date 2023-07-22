@@ -4,8 +4,31 @@
     margin: 0;
     background-color: darkgrey;
 }
+button
+{
+    padding: 7px 40px;
+    margin: 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: rgb(37, 37, 37);
+    color: white;
+    box-shadow: none;
 
-#users, #fullinfo, #postsheaders
+    transition: background-color, color, box-shadow, 0.2s ease 0s;
+}
+button:hover
+{
+    background-color: white;
+    color: black;
+    box-shadow: 3px 3px 7px black;
+}
+
+#controllelement
+{
+    display: flex;
+    justify-content: right;
+}
+#users, #userfullinfo, #postfullinfo
 {
     margin: 15px auto;
 }
@@ -14,17 +37,25 @@
     width: 80vw;
     padding-left: 10%;
 }
-#fullinfo, #postsheaders
+#userfullinfo
 {
     width: 20vw;
 }
-#userfullinfo
+#userfullinfo, #postfullinfo
 {
     font-size: 18px;
 }
-#fullinfo > p
+#biography > p
 {
     margin-bottom: 5px;
+}
+#postfullinfo
+{
+    width: 50vw;
+}
+#posttitle
+{
+    margin-bottom: 100px;
 }
 
 .userinfo
@@ -54,4 +85,8 @@
 {
     cursor: pointer;
     margin-bottom: 15px;
+}
+.comment
+{
+    border: 5px ridge;
 }
