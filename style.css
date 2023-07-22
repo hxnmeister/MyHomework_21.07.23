@@ -1,0 +1,57 @@
+*
+{
+    padding: 0;
+    margin: 0;
+    background-color: darkgrey;
+}
+
+#users, #fullinfo, #postsheaders
+{
+    margin: 15px auto;
+}
+#users
+{
+    width: 80vw;
+    padding-left: 10%;
+}
+#fullinfo, #postsheaders
+{
+    width: 20vw;
+}
+#userfullinfo
+{
+    font-size: 18px;
+}
+#fullinfo > p
+{
+    margin-bottom: 5px;
+}
+
+.userinfo
+{
+    display: inline-block;
+    border: 5px ridge white;
+    border-radius: 15px;
+    cursor: pointer;
+    margin: 10px;
+    box-shadow: 2px 2px 5px black;
+
+    transition: box-shadow 0.2s ease-in-out 0s;
+}
+.userinfo:hover
+{
+    box-shadow: 5px 5px 8px;
+}
+.userinfo > p
+{
+    margin: 10px;
+}
+.userinfo, .userinfo > p, .userinfo > p > b
+{
+    background-color: #A8A8A8;
+}
+.postheader
+{
+    cursor: pointer;
+    margin-bottom: 15px;
+}
