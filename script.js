@@ -99,8 +99,6 @@ const getPost = async (event, closestSelectorName) =>
         userFullInfo.hidden = true;
         postFullInfo.hidden = false;
 
-        alert(selectedPost.id);
-
         await fetch(`${postsApiUrl}/${selectedPost.id}`).then(response => response.json()).then(result => 
         {
             postTitle.innerHTML =
