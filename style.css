@@ -28,14 +28,13 @@ button:hover
     display: flex;
     justify-content: right;
 }
-#users, #userfullinfo, #postfullinfo
+#users, #userfullinfo, #postfullinfo, #newsfeed
 {
     margin: 15px auto;
 }
-#users
+#users, #newsfeed
 {
     width: 80vw;
-    padding-left: 10%;
 }
 #userfullinfo
 {
@@ -44,6 +43,18 @@ button:hover
 #userfullinfo, #postfullinfo
 {
     font-size: 18px;
+}
+#biography
+{
+    width: 13vw;
+    border: 4px ridge;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+#biography, #biography > p, #biography > p > b
+{
+    background-color: rgb(202, 201, 201);
 }
 #biography > p
 {
@@ -55,6 +66,9 @@ button:hover
 }
 #posttitle
 {
+    border: 3px double;
+    border-radius: 15px;
+    padding: 10px;
     margin-bottom: 100px;
 }
 
@@ -63,13 +77,29 @@ button:hover
     display: inline-block;
     border: 5px ridge white;
     border-radius: 15px;
-    cursor: pointer;
     margin: 10px;
-    box-shadow: 2px 2px 5px black;
-
-    transition: box-shadow 0.2s ease-in-out 0s;
 }
-.userinfo:hover
+.postinfo
+{
+    border: 5px groove gray;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: none;
+}
+.postinfo, .postinfo > p, .postinfo > p > b, .userinfo, .userinfo > p, .userinfo > p > b, .comment,
+.comment > p, .comment > p > b, #posttitle, #posttitle > p, #posttitle > p > b
+{
+    background-color: rgb(219, 219, 219);
+}
+.userinfo, .postinfo
+{
+    box-shadow: 2px 2px 5px black;
+    cursor: pointer;
+    
+    transition: box-shadow 0.2s ease-out 0s;
+}
+.userinfo:hover, .postinfo:hover
 {
     box-shadow: 5px 5px 8px;
 }
@@ -77,11 +107,7 @@ button:hover
 {
     margin: 10px;
 }
-.userinfo, .userinfo > p, .userinfo > p > b
-{
-    background-color: #A8A8A8;
-}
-.postheader
+.postheader,.authorname
 {
     cursor: pointer;
     margin-bottom: 15px;
@@ -89,4 +115,6 @@ button:hover
 .comment
 {
     border: 5px ridge;
+    border-radius: 20px;
+    padding: 10px;
 }
