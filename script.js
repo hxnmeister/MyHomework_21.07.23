@@ -87,6 +87,8 @@ const getUser = async (event, closestSelectorName) =>
             postHeadersList.innerHTML += `<li id="${post.id}" class="postheader"><u>${post.title}</u></li>`
         }));
     } 
+
+    postComments.innerHTML = "";
 }
 const getPost = async (event, closestSelectorName) =>
 {
